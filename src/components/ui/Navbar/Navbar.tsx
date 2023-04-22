@@ -1,8 +1,40 @@
-// SASS
-import styles from "./Navbar.module.scss";
+"use client";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
-const Navbar = () => {
-  return <div className={styles.u}>Navbar</div>;
+// Components
+import { NavbarLanding, NavbarAuth, NavbarSkeleton } from "../../../components";
+
+interface Props {
+  handleOpen: () => void;
+}
+
+type NavbarContext = "landing" | "login";
+
+const Navbar = ({ handleOpen }: Props) => {
+  const pathname = usePathname();
+
+  const [context, setContext] = useState<NavbarContext>("landing");
+
+  useEffect(() => {
+    switch (pathname) {
+      case "/login":
+        setContext("login");
+        break;
+      default:
+        setContext("landing");
+        break;
+    }
+  }, [pathname]);
+
+  switch (context) {
+    case "login":
+      return <NavbarAuth />;
+    case "landing":
+      return <NavbarLanding handleOpen={handleOpen} />;
+    default:
+      return <NavbarSkeleton />;
+  }
 };
 
-export { Navbar };
+export default Navbar;

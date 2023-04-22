@@ -5,8 +5,22 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
-      <h1>Hello World</h1>
-    </>
+    <div
+      style={{
+        display: "flex",
+        backgroundColor: "green",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <h1
+        style={{
+          fontSize: 70,
+        }}
+      >
+        Consorcio de Comidas a Domicilio
+      </h1>
+    </div>
   );
 }

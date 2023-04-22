@@ -1,0 +1,1 @@
+export { rakkasFont } from "./fonts";

@@ -1,7 +1,10 @@
 import "../styles/styles.scss";
 
+// Font
+import { rakkasFont } from "../components";
+
 // Components
-import { Navbar } from "../components";
+import { Header } from "../components";
 
 export const metadata = {
   title: "CCD",
@@ -15,9 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        <main>{children}</main>
+      <body className={rakkasFont.className}>
+        <Header />
+        {children}
       </body>
     </html>
   );
