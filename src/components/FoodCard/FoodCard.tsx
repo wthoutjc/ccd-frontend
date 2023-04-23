@@ -33,7 +33,7 @@ const FoodCard = ({ name, price, description, image }: Props) => {
           mb: 2,
         }}
       >
-        <Image src={image} width={130} alt="ccd-welcome" />
+        <Image src={image} width={130} alt="CapitalSabor-welcome" />
       </Box>
       <CardHeader />
       <Box

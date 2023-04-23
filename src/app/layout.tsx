@@ -7,7 +7,7 @@ import { rakkasFont } from "../components";
 import { Header } from "../components";
 
 export const metadata = {
-  title: "CCD",
+  title: "CapitalSabor",
   description: "Consorcio de Comidas a Domicilio",
 };
 

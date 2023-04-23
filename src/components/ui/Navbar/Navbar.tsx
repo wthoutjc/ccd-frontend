@@ -9,7 +9,7 @@ interface Props {
   handleOpen: () => void;
 }
 
-type NavbarContext = "landing" | "login";
+type NavbarContext = "landing" | "login" | "signup";
 
 const Navbar = ({ handleOpen }: Props) => {
   const pathname = usePathname();
@@ -21,6 +21,9 @@ const Navbar = ({ handleOpen }: Props) => {
       case "/login":
         setContext("login");
         break;
+      case "/signup":
+        setContext("signup");
+        break;
       default:
         setContext("landing");
         break;
@@ -29,6 +32,8 @@ const Navbar = ({ handleOpen }: Props) => {
 
   switch (context) {
     case "login":
+      return <NavbarAuth />;
+    case "signup":
       return <NavbarAuth />;
     case "landing":
       return <NavbarLanding handleOpen={handleOpen} />;

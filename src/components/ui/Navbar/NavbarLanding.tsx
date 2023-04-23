@@ -3,7 +3,6 @@ import {
   Box,
   AppBar,
   Toolbar,
-  Typography,
   Button,
   IconButton,
   Divider,
@@ -50,7 +49,7 @@ const NavbarLanding = ({ handleOpen }: Props) => {
           }}
         >
           <Link href="/">
-            <Image src={logoPic} width={180} alt="ccd-welcome" />
+            <Image src={logoPic} width={180} alt="CapitalSabor-welcome" />
           </Link>
 
           <Box
@@ -68,7 +67,7 @@ const NavbarLanding = ({ handleOpen }: Props) => {
               sx={{ mr: 2, ml: 2 }}
             />
 
-            <Link href="signin">
+            <Link href="signup">
               <Button
                 variant="contained"
                 sx={{

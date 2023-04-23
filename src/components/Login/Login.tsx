@@ -1,12 +1,9 @@
 "use client";
-import Link from "next/link";
+
 import { useState } from "react";
 import {
   Box,
   Button,
-  Chip,
-  CircularProgress,
-  Divider,
   Typography,
   TextField,
   InputAdornment,
@@ -18,9 +15,6 @@ import { useForm } from "react-hook-form";
 // Icons
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import PasswordIcon from "@mui/icons-material/Password";
-
-// Auth
-import { useAuth } from "../../hooks";
 
 interface LoginProps {
   username: string;
@@ -36,22 +30,24 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginProps>();
 
-  const { status, LogIn } = useAuth();
-  const { error, message } = status;
+  const LogIn = (data: LoginProps) => {
+    console.log(data);
+  };
 
   return (
     <Box
       sx={{
         p: 2,
-        backgroundColor: "red",
+        backgroundColor: "#f5f6fa",
+        borderRadius: "1em",
       }}
     >
       <Typography
         variant="h4"
         fontSize={"1.5em"}
-        fontWeight={400}
         textAlign={"center"}
         sx={{ mb: 2 }}
+        fontWeight={600}
       >
         Iniciar sesión
       </Typography>
@@ -111,7 +107,14 @@ const Login = () => {
               pr: 1,
             }}
           >
-            <Button type="submit" fullWidth variant="contained">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                backgroundColor: "#e67e22",
+              }}
+            >
               Iniciar sesión
             </Button>
           </Box>

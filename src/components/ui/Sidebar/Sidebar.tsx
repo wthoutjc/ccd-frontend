@@ -68,7 +68,7 @@ const Sidebar = ({ open, handleOpen }: Props) => {
           </IconButton>
           <Box sx={{ ml: 2 }}>
             <Link href="/" passHref onClick={toggleDrawer()} as={"/"}>
-              <Image src={logoPic} width={180} alt="ccd-welcome" />
+              <Image src={logoPic} width={180} alt="CapitalSabor-welcome" />
             </Link>
           </Box>
         </Toolbar>
