@@ -1,5 +1,4 @@
-import { api } from "../../utils";
-import { JWT } from "next-auth/jwt";
+import { api } from "@/utils";
 
 interface Props {
   username: string;

@@ -5,7 +5,7 @@ import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 // Interfaces
-import { IContextTable } from "../../../interfaces";
+import { IContextTable } from "@/interfaces";
 
 interface Props {
   title: string;

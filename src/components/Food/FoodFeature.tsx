@@ -2,7 +2,7 @@
 import { FoodTable } from "@/components";
 
 // Interfaces
-import { ITable } from "../../interfaces";
+import { ITable } from "@/interfaces";
 
 interface Props {
   featureData: ITable;

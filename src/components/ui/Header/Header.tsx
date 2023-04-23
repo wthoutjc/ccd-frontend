@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Components
-import { Navbar, Sidebar } from "../../../components";
+import { Navbar, Sidebar } from "@/components";
 
 const Header = () => {
   const [open, setOpen] = useState(false);

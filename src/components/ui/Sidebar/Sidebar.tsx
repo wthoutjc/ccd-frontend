@@ -13,7 +13,7 @@ import {
 
 // Images
 import Image from "next/image";
-import logoPic from "../../../assets/logo.png";
+import logoPic from "@/assets/logo.png";
 
 // Icons
 import {

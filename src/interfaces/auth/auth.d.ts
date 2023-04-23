@@ -1,5 +1,5 @@
 // Interfaces
-import { IUser } from "../";
+import { IUser } from "@/interfaces";
 
 export interface IAuth {
   logged: boolean;

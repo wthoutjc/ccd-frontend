@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 // Reducers
-import { authReducer } from "../reducers";
+import { authReducer } from "@/reducers";
 
 export function makeStore() {
   return configureStore({

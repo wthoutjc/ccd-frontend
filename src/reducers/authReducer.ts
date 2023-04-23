@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Interfaces
-import { IAuth, IUser } from "../interfaces";
-import { AppState } from "../store";
+import { IAuth, IUser } from "@/interfaces";
+import { AppState } from "@/store";
 
 const initialState: IAuth = {
   logged: false,

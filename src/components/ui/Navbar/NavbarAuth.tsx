@@ -6,7 +6,7 @@ import Link from "next/link";
 
 // Images
 import Image from "next/image";
-import logoPic from "../../../assets/logo.png";
+import logoPic from "@/assets/logo.png";
 
 const NavbarLanding = () => {
   return (

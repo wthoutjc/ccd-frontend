@@ -8,7 +8,7 @@ import {
   NavbarAuth,
   NavbarSkeleton,
   NavbarLogged,
-} from "../../../components";
+} from "@/components";
 
 interface Props {
   handleOpen: () => void;

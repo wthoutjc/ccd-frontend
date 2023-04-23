@@ -1,11 +1,11 @@
 import styles from "./signup.module.scss";
 
 // Client Components
-import { SignUp } from "../../components";
+import { SignUp } from "@/components";
 
 // Images
 import Image from "next/image";
-import pizzaPic from "../../assets/pizza.png";
+import pizzaPic from "@/assets/pizza.png";
 
 export const metadata = {
   title: "Bienvenid@ - CapitalSabor",
