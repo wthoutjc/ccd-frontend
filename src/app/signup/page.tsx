@@ -14,11 +14,11 @@ export const metadata = {
 
 const SignUpPage = () => {
   return (
-    <div className={styles.login}>
-      <div className={styles.loginInfo}>
+    <div className={styles.signup}>
+      <div className={styles.signupInfo}>
         <Image src={pizzaPic} width={380} alt="CapitalSabor-welcome" />
       </div>
-      <div className={styles.loginClient}>
+      <div className={styles.signupClient}>
         <SignUp />
       </div>
     </div>

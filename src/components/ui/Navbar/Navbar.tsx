@@ -3,13 +3,18 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 // Components
-import { NavbarLanding, NavbarAuth, NavbarSkeleton } from "../../../components";
+import {
+  NavbarLanding,
+  NavbarAuth,
+  NavbarSkeleton,
+  NavbarLogged,
+} from "../../../components";
 
 interface Props {
   handleOpen: () => void;
 }
 
-type NavbarContext = "landing" | "login" | "signup";
+type NavbarContext = "landing" | "login" | "signup" | "home";
 
 const Navbar = ({ handleOpen }: Props) => {
   const pathname = usePathname();
@@ -18,6 +23,9 @@ const Navbar = ({ handleOpen }: Props) => {
 
   useEffect(() => {
     switch (pathname) {
+      case "/home":
+        setContext("home");
+        break;
       case "/login":
         setContext("login");
         break;
@@ -31,6 +39,8 @@ const Navbar = ({ handleOpen }: Props) => {
   }, [pathname]);
 
   switch (context) {
+    case "home":
+      return <NavbarLogged handleOpen={handleOpen} />;
     case "login":
       return <NavbarAuth />;
     case "signup":
