@@ -4,16 +4,11 @@ import { FoodTable } from "@/components";
 // Interfaces
 import { ITable } from "../../interfaces";
 
-async function getData() {
-  const res = await fetch(
-    `${process.env.API_URL}/home/feature-data`
-  );
-  return (await res.json()) as ITable;
+interface Props {
+  featureData: ITable;
 }
 
-const FoodFeature = async () => {
-  const data = await getData();
-
+const FoodFeature = ({ featureData }: Props) => {
   return (
     <section
       id="destacados"
@@ -30,7 +25,7 @@ const FoodFeature = async () => {
           padding: "1rem",
         }}
       >
-        <FoodTable {...data} />
+        <FoodTable {...featureData} />
       </div>
     </section>
   );

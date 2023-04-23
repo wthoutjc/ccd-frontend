@@ -2,16 +2,11 @@
 import { FoodCard } from "@/components";
 import { IFood } from "@/interfaces/food/food";
 
-async function getData() {
-  const res = await fetch(
-    `${process.env.API_URL}/home/recents-data`
-  );
-  return (await res.json()) as IFood[];
+interface Props {
+  recentsData: IFood[];
 }
 
-const FoodRecents = async () => {
-  const recentsData = await getData();
-
+const FoodRecents = ({ recentsData }: Props) => {
   return (
     <section
       id="recientes"

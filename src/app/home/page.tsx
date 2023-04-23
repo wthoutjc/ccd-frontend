@@ -1,7 +1,23 @@
 // Components
 import { FoodRecents, FoodFeature } from "@/components";
 
-const HomePage = () => {
+// Interfaces
+import { IFood, ITable } from "@/interfaces";
+
+async function getRecentFood() {
+  const res = await fetch(`${process.env.API_URL}/home/recents-data`);
+  return (await res.json()) as IFood[];
+}
+
+async function getFeatureFood() {
+  const res = await fetch(`${process.env.API_URL}/home/feature-data`);
+  return (await res.json()) as ITable;
+}
+
+const HomePage = async () => {
+  const recentsData = await getRecentFood();
+  const featureData = await getFeatureFood();
+
   return (
     <main
       style={{
@@ -11,10 +27,8 @@ const HomePage = () => {
         flexDirection: "column",
       }}
     >
-      {/* @ts-expect-error Async Server Component */}
-      <FoodRecents />
-      {/* @ts-expect-error Async Server Component */}
-      <FoodFeature />
+      <FoodRecents recentsData={recentsData} />
+      <FoodFeature featureData={featureData} />
     </main>
   );
 };
