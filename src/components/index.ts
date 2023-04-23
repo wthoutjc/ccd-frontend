@@ -8,3 +8,4 @@ export {
 } from "./ui";
 export { rakkasFont } from "./Fonts";
 export { Login } from "./Login";
+export { FoodCard } from "./FoodCard";

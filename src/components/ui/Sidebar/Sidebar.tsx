@@ -11,6 +11,10 @@ import {
   Button,
 } from "@mui/material";
 
+// Images
+import Image from "next/image";
+import logoPic from "../../../assets/logo.png";
+
 // Icons
 import {
   Inbox as InboxIcon,
@@ -45,12 +49,17 @@ const Sidebar = ({ open, handleOpen }: Props) => {
       onClose={toggleDrawer()}
       onOpen={toggleDrawer()}
     >
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "#dfe6e9",
+          height: "100%",
+        }}
+      >
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
             onClick={toggleDrawer()}
@@ -58,8 +67,8 @@ const Sidebar = ({ open, handleOpen }: Props) => {
             <MenuIcon />
           </IconButton>
           <Box sx={{ ml: 2 }}>
-            <Link href={"/"} passHref onClick={toggleDrawer()} as={"/"}>
-              CCD
+            <Link href="/" passHref onClick={toggleDrawer()} as={"/"}>
+              <Image src={logoPic} width={180} alt="ccd-welcome" />
             </Link>
           </Box>
         </Toolbar>
