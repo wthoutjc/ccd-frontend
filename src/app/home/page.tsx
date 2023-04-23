@@ -5,13 +5,23 @@ import { FoodRecents, FoodFeature } from "@/components";
 import { IFood, ITable } from "@/interfaces";
 
 async function getRecentFood() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/home/recents-data`);
-  return (await res.json()) as IFood[];
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/home/recents-data`
+  );
+  const data = await res.json();
+  console.log("IMPRIMIENDO getRecentFood");
+  console.log(data);
+  return data as IFood[];
 }
 
 async function getFeatureFood() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/home/feature-data`);
-  return (await res.json()) as ITable;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/home/feature-data`
+  );
+  const data = await res.json();
+  console.log("IMPRIMIENDO getFeatureFood");
+  console.log(data);
+  return data as ITable;
 }
 
 const HomePage = async () => {
