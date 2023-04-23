@@ -14,7 +14,6 @@ export {
   FoodFeature,
   FoodRecents,
   FoodTable,
-  TablePagination,
   TableSkeleton,
   TableToolbar,
   FoodCardSkeleton,

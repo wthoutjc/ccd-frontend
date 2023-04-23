@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   Box,
@@ -7,6 +7,10 @@ import {
   Typography,
   TextField,
   InputAdornment,
+  LinearProgress,
+  IconButton,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 
 // React Hook Form
@@ -15,6 +19,11 @@ import { useForm } from "react-hook-form";
 // Icons
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import PasswordIcon from "@mui/icons-material/Password";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import StoreIcon from "@mui/icons-material/Store";
+import SupervisedUserCircleOutlinedIcon from "@mui/icons-material/SupervisedUserCircleOutlined";
+import Link from "next/link";
 
 interface LoginProps {
   username: string;
@@ -22,7 +31,7 @@ interface LoginProps {
 }
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const router = useRouter();
 
   const {
     register,
@@ -30,32 +39,59 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginProps>();
 
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [company, setCompany] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCompany(event.target.checked);
+  };
+
   const LogIn = (data: LoginProps) => {
-    console.log(data);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      return router.push("/home");
+    }, 2000);
   };
 
   return (
     <Box
       sx={{
-        p: 2,
         backgroundColor: "#f5f6fa",
         borderRadius: "1em",
+        overflow: "hidden",
       }}
     >
+      {loading && <LinearProgress sx={{ mb: 1 }} />}
       <Typography
         variant="h4"
         fontSize={"1.5em"}
         textAlign={"center"}
-        sx={{ mb: 2 }}
         fontWeight={600}
+        sx={{ mt: 1 }}
       >
         Iniciar sesión
       </Typography>
       <Box
         sx={{
           width: "100%",
+          p: 2,
+          pt: 0,
         }}
       >
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={company}
+              onChange={handleChange}
+              icon={<SupervisedUserCircleOutlinedIcon />}
+              checkedIcon={<StoreIcon />}
+            />
+          }
+          label={company ? "Empresa" : "Persona"}
+          sx={{ mb: 1 }}
+        />
         <form onSubmit={handleSubmit(LogIn)}>
           <TextField
             fullWidth
@@ -81,10 +117,10 @@ const Login = () => {
           />
           <TextField
             fullWidth
-            type="text"
-            autoComplete="username"
+            type={showPassword ? "text" : "password"}
+            autoComplete="password"
             sx={{ marginBottom: "1em" }}
-            placeholder="Ej: 1001231235"
+            placeholder="Ej: *********"
             label="Contraseña*"
             error={!!errors.password}
             helperText={
@@ -99,6 +135,13 @@ const Login = () => {
                   <PasswordIcon />
                 </InputAdornment>
               ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
             }}
           />
           <Box
@@ -108,6 +151,7 @@ const Login = () => {
             }}
           >
             <Button
+              disabled={loading}
               type="submit"
               fullWidth
               variant="contained"
@@ -115,10 +159,21 @@ const Login = () => {
                 backgroundColor: "#e67e22",
               }}
             >
-              Iniciar sesión
+              {loading ? "Iniciando sesión..." : "Iniciar sesión"}
             </Button>
           </Box>
         </form>
+        <Link href="/signup">
+          <Typography
+            variant="body2"
+            fontSize={"0.8em"}
+            textAlign={"center"}
+            sx={{ mt: 1 }}
+            fontWeight={600}
+          >
+            Registrarme
+          </Typography>
+        </Link>
       </Box>
     </Box>
   );

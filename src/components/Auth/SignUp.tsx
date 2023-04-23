@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   Box,
@@ -7,6 +7,10 @@ import {
   Typography,
   TextField,
   InputAdornment,
+  LinearProgress,
+  IconButton,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 
 // React Hook Form
@@ -15,6 +19,11 @@ import { useForm } from "react-hook-form";
 // Icons
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import PasswordIcon from "@mui/icons-material/Password";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import StoreIcon from "@mui/icons-material/Store";
+import SupervisedUserCircleOutlinedIcon from "@mui/icons-material/SupervisedUserCircleOutlined";
+import Link from "next/link";
 
 interface SignUpProps {
   username: string;
@@ -22,7 +31,7 @@ interface SignUpProps {
 }
 
 const SignUp = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const router = useRouter();
 
   const {
     register,
@@ -30,23 +39,36 @@ const SignUp = () => {
     formState: { errors },
   } = useForm<SignUpProps>();
 
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [company, setCompany] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCompany(event.target.checked);
+  };
+
   const handleSignUp = (data: SignUpProps) => {
-    console.log(data);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      return router.push("/home");
+    }, 2000);
   };
 
   return (
     <Box
       sx={{
-        p: 2,
         backgroundColor: "#f5f6fa",
         borderRadius: "1em",
+        overflow: "hidden",
       }}
     >
+      {loading && <LinearProgress sx={{ mb: 1 }} />}
       <Typography
         variant="h4"
         fontSize={"1.5em"}
         textAlign={"center"}
-        sx={{ mb: 2 }}
+        sx={{ mt: 1 }}
         fontWeight={600}
       >
         Registrarse
@@ -54,8 +76,22 @@ const SignUp = () => {
       <Box
         sx={{
           width: "100%",
+          p: 2,
+          pt: 0,
         }}
       >
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={company}
+              onChange={handleChange}
+              icon={<SupervisedUserCircleOutlinedIcon />}
+              checkedIcon={<StoreIcon />}
+            />
+          }
+          label={company ? "Empresa" : "Persona"}
+          sx={{ mb: 1 }}
+        />
         <form onSubmit={handleSubmit(handleSignUp)}>
           <TextField
             fullWidth
@@ -63,13 +99,11 @@ const SignUp = () => {
             autoComplete="username"
             sx={{ marginBottom: "1em" }}
             placeholder="Ej: 1001231235"
-            label="Cédula ó NIT*"
+            label="NIT*"
             error={!!errors.username}
-            helperText={
-              !!errors.username ? errors.username.message : "Cédula ó NIT"
-            }
+            helperText={!!errors.username ? errors.username.message : "NIT"}
             {...register("username", {
-              required: "La cédula ó NIT es obligatoria",
+              required: "El NIT es obligatorio",
             })}
             InputProps={{
               startAdornment: (
@@ -81,10 +115,10 @@ const SignUp = () => {
           />
           <TextField
             fullWidth
-            type="text"
-            autoComplete="username"
+            type={showPassword ? "text" : "password"}
+            autoComplete="password"
             sx={{ marginBottom: "1em" }}
-            placeholder="Ej: 1001231235"
+            placeholder="Ej: *********"
             label="Contraseña*"
             error={!!errors.password}
             helperText={
@@ -99,6 +133,13 @@ const SignUp = () => {
                   <PasswordIcon />
                 </InputAdornment>
               ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
             }}
           />
           <Box
@@ -108,6 +149,7 @@ const SignUp = () => {
             }}
           >
             <Button
+              disabled={loading}
               type="submit"
               fullWidth
               variant="contained"
@@ -115,10 +157,21 @@ const SignUp = () => {
                 backgroundColor: "#e67e22",
               }}
             >
-              Registrarse
+              {loading ? "Registrando..." : "Registrarse"}
             </Button>
           </Box>
         </form>
+        <Link href="/login">
+          <Typography
+            variant="body2"
+            fontSize={"0.8em"}
+            textAlign={"center"}
+            sx={{ mt: 1 }}
+            fontWeight={600}
+          >
+            Iniciar sesión
+          </Typography>
+        </Link>
       </Box>
     </Box>
   );
