@@ -1,8 +1,17 @@
 "use client";
-import { Box, AppBar, Toolbar, IconButton, Button } from "@mui/material";
+import {
+  Box,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+  Tooltip,
+  Divider,
+} from "@mui/material";
 
 // Icons
 import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 // Next
 import Link from "next/link";
@@ -46,18 +55,37 @@ const NavbarLogged = ({ handleOpen }: Props) => {
           </Link>
         </Box>
 
-        <Link href="/">
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#e67e22",
-              width: "160px",
-            }}
-            size="small"
-          >
-            Cerrar sesión
-          </Button>
-        </Link>
+        <Box
+          sx={{
+            display: "flex",
+          }}
+        >
+          <Tooltip title="Ver carrito">
+            <IconButton>
+              <ShoppingCartIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Divider
+            orientation="vertical"
+            variant="middle"
+            flexItem
+            sx={{ mr: 1 }}
+          />
+
+          <Link href="/">
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#e67e22",
+                width: "160px",
+              }}
+              size="small"
+            >
+              Cerrar sesión
+            </Button>
+          </Link>
+        </Box>
       </Toolbar>
     </AppBar>
   );

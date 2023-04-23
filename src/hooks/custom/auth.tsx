@@ -32,8 +32,6 @@ const useAuth = () => {
         redirect: false,
       });
 
-      console.log(res);
-
       if (res) {
         if (res.ok) return router.push("/");
         setStatus({

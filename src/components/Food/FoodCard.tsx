@@ -1,5 +1,12 @@
 "use client";
-import { Box, Typography, Card, CardHeader, IconButton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Card,
+  CardHeader,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
 
 // Next - Image
 import Image, { StaticImageData } from "next/image";
@@ -60,18 +67,20 @@ const FoodCard = ({ name, price, description, image }: Props) => {
         <Typography variant="body2" fontWeight={600}>
           {price}
         </Typography>
-        <IconButton
-          sx={{
-            backgroundColor: "#e67e22",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "#e67a11",
-            },
-          }}
-          size="small"
-        >
-          <AddIcon fontSize={"small"} />
-        </IconButton>
+        <Tooltip title="Añadir al carrito">
+          <IconButton
+            sx={{
+              backgroundColor: "#e67e22",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "#e67a11",
+              },
+            }}
+            size="small"
+          >
+            <AddIcon fontSize={"small"} />
+          </IconButton>
+        </Tooltip>
       </Box>
     </Card>
   );

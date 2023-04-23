@@ -2,11 +2,11 @@ import { FoodCard } from "@/components";
 
 // Images
 import Image from "next/image";
-import hamburguerPic from "../assets/hamburguesa.png";
-import chickenPic from "../assets/pollo.png";
-import hamburguerXLPic from "../assets/hamburguesaXL.png";
-import foodPic from "../assets/food.png";
-import papasPic from "../assets/papas.png";
+import hamburguerPic from "@/assets/hamburguesa.png";
+import chickenPic from "@/assets/pollo.png";
+import hamburguerXLPic from "@/assets/hamburguesaXL.png";
+import foodPic from "@/assets/food.png";
+import papasPic from "@/assets/papas.png";
 
 export const metadata = {
   title: "Bienvenid@ - CapitalSabor",

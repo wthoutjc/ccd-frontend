@@ -1,11 +1,21 @@
 // Components
-import { Home } from "../../components";
+import { FoodRecents, FoodFeature } from "@/components";
 
 const HomePage = () => {
   return (
-    <div>
-      <Home />
-    </div>
+    <main
+      style={{
+        backgroundColor: "#dfe6e9",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      {/* @ts-expect-error Async Server Component */}
+      <FoodRecents />
+      {/* @ts-expect-error Async Server Component */}
+      <FoodFeature />
+    </main>
   );
 };
 
