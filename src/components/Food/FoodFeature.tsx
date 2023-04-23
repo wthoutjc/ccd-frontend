@@ -6,7 +6,7 @@ import { ITable } from "../../interfaces";
 
 async function getData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/home/feature-data`
+    `${process.env.API_URL}/home/feature-data`
   );
   return (await res.json()) as ITable;
 }

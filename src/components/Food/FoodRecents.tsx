@@ -4,7 +4,7 @@ import { IFood } from "@/interfaces/food/food";
 
 async function getData() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/home/recents-data`
+    `${process.env.API_URL}/home/recents-data`
   );
   return (await res.json()) as IFood[];
 }
