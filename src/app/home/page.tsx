@@ -5,12 +5,12 @@ import { FoodRecents, FoodFeature } from "@/components";
 import { IFood, ITable } from "@/interfaces";
 
 async function getRecentFood() {
-  const res = await fetch(`${process.env.API_URL}/home/recents-data`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/home/recents-data`);
   return (await res.json()) as IFood[];
 }
 
 async function getFeatureFood() {
-  const res = await fetch(`${process.env.API_URL}/home/feature-data`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/home/feature-data`);
   return (await res.json()) as ITable;
 }
 
