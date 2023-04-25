@@ -1,13 +1,14 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 // Reducers
-import { authReducer, cartReducer } from "@/reducers";
+import { authReducer, cartReducer, uiReducer } from "@/reducers";
 
 export function makeStore() {
   return configureStore({
     reducer: {
       auth: authReducer,
       cart: cartReducer,
+      ui: uiReducer,
     },
   });
 }

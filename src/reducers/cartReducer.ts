@@ -21,6 +21,9 @@ const cartSlice = createSlice({
         (product) => product.name !== action.payload.name
       );
     },
+    cleanCart: (state: ICart) => {
+      state.products = [];
+    },
     openCart: (state: ICart) => {
       state.open = true;
     },
@@ -33,7 +36,7 @@ const cartSlice = createSlice({
 export { cartSlice };
 
 // Actions
-export const { addProduct, removeProduct, openCart, closeCart } =
+export const { addProduct, removeProduct, openCart, closeCart, cleanCart } =
   cartSlice.actions;
 
 // Selector to access to the store

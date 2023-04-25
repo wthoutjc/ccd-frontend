@@ -1,10 +1,11 @@
 import "@/styles/styles.scss";
+import "animate.css";
 
 // Font
 import { rakkasFont } from "@/components";
 
 // Components
-import { Header, Providers } from "@/components";
+import { Header, Providers, Notifications } from "@/components";
 
 export const metadata = {
   title: "CapitalSabor",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={rakkasFont.className}>
         <Providers>
+          <Notifications />
           <Header />
           {children}
         </Providers>

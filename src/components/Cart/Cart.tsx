@@ -1,16 +1,10 @@
 "use client";
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogTitle,
-  Divider,
-  Typography,
-} from "@mui/material";
+import { useState } from "react";
+import { Box, Button, Dialog, Divider, Typography } from "@mui/material";
 
 // Redux
 import { useAppSelector, useAppDispatch } from "@/hooks";
-import { closeCart } from "@/reducers";
+import { closeCart, cleanCart } from "@/reducers";
 
 // Icons
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -21,11 +15,13 @@ import Image from "next/image";
 import logoPic from "@/assets/logo.png";
 
 // Components
-import { CartItem } from "@/components";
+import { CartItem, PayCart } from "@/components";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
   const { products, open } = useAppSelector((state) => state.cart);
+
+  const [pay, setPay] = useState(false);
 
   const handleClose = () => {
     dispatch(closeCart());
@@ -39,12 +35,13 @@ const Cart = () => {
         p: 2,
       }}
     >
-      <DialogTitle
+      <Box
         sx={{
           display: "flex",
           alignItems: "center",
           backgroundColor: "#cd6133",
           color: "white",
+          p: 2,
         }}
       >
         <ShoppingCartIcon fontSize="large" />
@@ -52,38 +49,52 @@ const Cart = () => {
           Carrito
         </Typography>
         <Image src={logoPic} width={180} alt="capital-sabor" />
-      </DialogTitle>
-      <Divider variant="middle" />
-      <Box sx={{ p: 2 }}>
-        {products.map((product) => (
-          <CartItem key={product.name} {...product} />
-        ))}
       </Box>
       <Divider variant="middle" />
-      <Box
-        sx={{
-          p: 1,
-        }}
-      >
-        <Typography variant="h5" fontWeight={600}>
-          Total: $ {products.reduce((acc, curr) => acc + curr.price, 0)}
-        </Typography>
-      </Box>
-      <Divider variant="middle" />
-      <Box
-        sx={{
-          p: 1,
-        }}
-      >
-        <Button
-          variant="contained"
-          color="success"
-          fullWidth
-          startIcon={<PointOfSaleIcon />}
-        >
-          Efectuar pago
-        </Button>
-      </Box>
+      {pay ? (
+        <PayCart
+          close={() => {
+            dispatch(closeCart());
+            setPay(false);
+            dispatch(cleanCart());
+          }}
+        />
+      ) : (
+        <>
+          <Box sx={{ p: 2 }}>
+            {products.map((product) => (
+              <CartItem key={product.name} {...product} />
+            ))}
+          </Box>
+          <Divider variant="middle" />
+          <Box
+            sx={{
+              p: 1,
+            }}
+          >
+            <Typography variant="h5" fontWeight={600}>
+              Total: $ {products.reduce((acc, curr) => acc + curr.price, 0)}
+            </Typography>
+          </Box>
+          <Divider variant="middle" />
+          <Box
+            sx={{
+              p: 1,
+            }}
+          >
+            <Button
+              disabled={products.length === 0}
+              variant="contained"
+              color="success"
+              fullWidth
+              startIcon={<PointOfSaleIcon />}
+              onClick={() => setPay(true)}
+            >
+              Efectuar pago
+            </Button>
+          </Box>
+        </>
+      )}
     </Dialog>
   );
 };
