@@ -21,7 +21,11 @@ import {
   Mail as MailIcon,
   Menu as MenuIcon,
 } from "@mui/icons-material";
-type Anchor = "top" | "left" | "bottom" | "right";
+
+// Redux
+import { useAppSelector } from "@/hooks";
+import ListAuth from "./ListAuth";
+import ListNoAuth from "./ListNoAuth";
 
 interface Props {
   open: boolean;
@@ -29,6 +33,9 @@ interface Props {
 }
 
 const Sidebar = ({ open, handleOpen }: Props) => {
+  const { logged, user } = useAppSelector((state) => state.auth);
+  const { role } = user;
+
   const toggleDrawer =
     () => async (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -54,6 +61,7 @@ const Sidebar = ({ open, handleOpen }: Props) => {
         sx={{
           backgroundColor: "#dfe6e9",
           height: "100%",
+          color: "#2d3436",
         }}
       >
         <Toolbar>
@@ -72,6 +80,8 @@ const Sidebar = ({ open, handleOpen }: Props) => {
             </Link>
           </Box>
         </Toolbar>
+        {logged && <ListAuth role={role} />}
+        {!logged && <ListNoAuth />}
       </AppBar>
     </SwipeableDrawer>
   );

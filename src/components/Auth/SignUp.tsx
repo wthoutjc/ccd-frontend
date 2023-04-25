@@ -25,6 +25,10 @@ import StoreIcon from "@mui/icons-material/Store";
 import SupervisedUserCircleOutlinedIcon from "@mui/icons-material/SupervisedUserCircleOutlined";
 import Link from "next/link";
 
+// Redux
+import { useAppDispatch } from "@/hooks";
+import { login, setUser } from "@/reducers";
+
 interface SignUpProps {
   username: string;
   password: string;
@@ -32,6 +36,7 @@ interface SignUpProps {
 
 const SignUp = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -51,7 +56,16 @@ const SignUp = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      return router.push("/home");
+      dispatch(login());
+      dispatch(
+        setUser({
+          email: "some-email@domain.com",
+          id: 1010101010,
+          name: "Pepe",
+          role: company ? "Restaurant" : "Client",
+        })
+      );
+      return router.push(company ? "/restaurant" : "/home");
     }, 2000);
   };
 

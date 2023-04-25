@@ -9,6 +9,7 @@ import {
   Divider,
   Badge,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 // Icons
 import MenuIcon from "@mui/icons-material/Menu";
@@ -23,7 +24,7 @@ import logoPic from "@/assets/logo.png";
 
 // Redux
 import { useAppSelector, useAppDispatch } from "@/hooks";
-import { openCart } from "@/reducers";
+import { openCart, logout, setUser } from "@/reducers";
 
 interface Props {
   handleOpen: () => void;
@@ -31,10 +32,25 @@ interface Props {
 
 const NavbarLogged = ({ handleOpen }: Props) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const { products } = useAppSelector((state) => state.cart);
 
   const handleOpenCart = () => {
     dispatch(openCart());
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(
+      setUser({
+        email: "",
+        id: 0,
+        name: "",
+        role: null,
+      })
+    );
+    return router.push("/login");
   };
 
   return (
@@ -70,6 +86,7 @@ const NavbarLogged = ({ handleOpen }: Props) => {
         <Box
           sx={{
             display: "flex",
+            alignItems: "center",
           }}
         >
           <Tooltip title="Ver carrito" sx={{ mr: 1 }}>
@@ -87,18 +104,17 @@ const NavbarLogged = ({ handleOpen }: Props) => {
             sx={{ mr: 1 }}
           />
 
-          <Link href="/">
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#e67e22",
-                width: "160px",
-              }}
-              size="small"
-            >
-              Cerrar sesión
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#e67e22",
+              width: "160px",
+            }}
+            size="small"
+            onClick={handleLogout}
+          >
+            Cerrar sesión
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>

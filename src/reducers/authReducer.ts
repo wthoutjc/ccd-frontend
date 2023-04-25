@@ -22,8 +22,12 @@ const authSlice = createSlice({
       state.logged = true;
     },
     logout: (state: IAuth) => {
-      state = {
-        ...initialState,
+      state.logged = false;
+      state.user = {
+        id: 0,
+        name: "",
+        email: "",
+        role: null,
       };
     },
     setUser: (state: IAuth, action: { payload: IUser }) => {

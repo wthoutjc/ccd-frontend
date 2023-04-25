@@ -4,9 +4,10 @@ import { IFood } from "@/interfaces/food/food";
 
 interface Props {
   recentsData: IFood[];
+  title?: string;
 }
 
-const FoodRecents = ({ recentsData }: Props) => {
+const FoodRecents = ({ recentsData, title = "Recientes" }: Props) => {
   return (
     <section
       id="recientes"
@@ -16,7 +17,7 @@ const FoodRecents = ({ recentsData }: Props) => {
         overflow: "auto",
       }}
     >
-      <h4 style={{ paddingLeft: "1rem" }}>Recientes</h4>
+      <h4 style={{ paddingLeft: "1rem" }}>{title}</h4>
       <div
         style={{
           display: "flex",
