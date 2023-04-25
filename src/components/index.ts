@@ -8,6 +8,7 @@ export {
   NavbarLogged,
   NavbarSkeleton,
   Sidebar,
+  Providers,
 } from "./ui";
 export {
   FoodCard,
@@ -18,3 +19,4 @@ export {
   TableToolbar,
   FoodCardSkeleton,
 } from "./Food";
+export { Cart, AddToCart, CartItem } from "./Cart";

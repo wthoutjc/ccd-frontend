@@ -1,88 +1,77 @@
-"use client";
-import {
-  Box,
-  Typography,
-  Card,
-  CardHeader,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
-
 // Next - Image
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
-// Icons
-import AddIcon from "@mui/icons-material/Add";
+// Components
+import { AddToCart } from "@/components";
 
-interface Props {
-  name: string;
-  price: number;
-  description: string;
-  image: StaticImageData;
-}
+// Interfaces
+import { IFood } from "@/interfaces";
 
-const FoodCard = ({ name, price, description, image }: Props) => {
+const FoodCard = (food: IFood) => {
+  const { name, price, description, image } = food;
+
   return (
-    <Card
+    <div
       style={{
         display: "flex",
-        flexDirection: "column",
-        margin: "1rem",
         overflow: "hidden",
         padding: "1rem",
+        backgroundColor: "#fff",
+        borderRadius: "0.5rem",
+        boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+        margin: "0.8rem",
+        minWidth: 300,
       }}
     >
-      <Box
-        sx={{
+      <div
+        style={{
           display: "flex",
           justifyContent: "center",
-          maxHeight: "100px",
-          mb: 2,
+          marginBottom: 2,
+          padding: "0.5rem",
         }}
       >
         <Image src={image} width={130} alt="CapitalSabor-welcome" />
-      </Box>
-      <CardHeader />
-      <Box
-        sx={{
+      </div>
+      <div
+        style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Typography variant="body1" fontWeight={600}>
+        <p
+          style={{
+            fontSize: "1rem",
+            fontWeight: 600,
+          }}
+        >
           {name}
-        </Typography>
-        <Typography variant="body2">{description}</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography variant="body2" fontWeight={600}>
-          {price}
-        </Typography>
-        <Tooltip title="Añadir al carrito">
-          <IconButton
-            sx={{
-              backgroundColor: "#e67e22",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "#e67a11",
-              },
-            }}
-            size="small"
-          >
-            <AddIcon fontSize={"small"} />
-          </IconButton>
-        </Tooltip>
-      </Box>
-    </Card>
+        </p>
+        <p
+          style={{
+            fontSize: "0.8rem",
+            fontWeight: 400,
+            textAlign: "center",
+            margin: "0.5rem",
+          }}
+        >
+          {description}
+        </p>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <p>{price}</p>
+          <AddToCart {...food} />
+        </div>
+      </div>
+    </div>
   );
 };
 

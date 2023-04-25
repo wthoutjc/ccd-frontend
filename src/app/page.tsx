@@ -30,6 +30,7 @@ export default function Home() {
           padding: "1rem",
           justifyContent: "space-between",
           height: "55%",
+          overflow: "auto",
         }}
       >
         <div
@@ -98,6 +99,7 @@ export default function Home() {
           <div
             style={{
               display: "flex",
+              overflow: "auto",
             }}
           >
             {[

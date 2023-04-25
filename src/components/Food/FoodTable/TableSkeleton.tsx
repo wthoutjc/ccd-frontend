@@ -3,44 +3,64 @@ import { CircularProgress, Skeleton } from "@mui/material";
 
 const TableSkeleton = () => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <td
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        flexDirection: "column",
+        position: "relative",
+        backgroundColor: "white",
+        borderRadius: "10px",
+        overflow: "hidden",
+      }}
+    >
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <thead>
+          <tr
             style={{
-              display: "flex",
-              alignItems: "center",
-              fontSize: "1rem",
+              backgroundColor: "#e67e22",
+              color: "white",
+              textAlign: "left",
+              fontWeight: "600",
+              position: "sticky",
+              top: "45px",
+              zIndex: 100,
             }}
           >
-            <CircularProgress
-              size={20}
-              sx={{
-                mr: 1,
+            <td
+              style={{
+                fontSize: "1rem",
               }}
-            />{" "}
-            Cargando datos
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <Skeleton variant="rectangular" width={"100%"} height={43} />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <Skeleton variant="rectangular" width={"100%"} height={43} />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <Skeleton variant="rectangular" width={"100%"} height={43} />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            >
+              <CircularProgress
+                size={20}
+                sx={{
+                  mr: 1,
+                }}
+              />{" "}
+              Cargando datos
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <Skeleton variant="rectangular" width={"100%"} height={43} />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Skeleton variant="rectangular" width={"100%"} height={43} />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Skeleton variant="rectangular" width={"100%"} height={43} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log(error.response);
+    console.error(error.response);
     if (error.response.status === 401 || error.response.status === 422) {
       await signOut({ redirect: false });
     }

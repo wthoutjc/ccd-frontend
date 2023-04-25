@@ -13,6 +13,7 @@ const FoodRecents = ({ recentsData }: Props) => {
       style={{
         display: "flex",
         flexDirection: "column",
+        overflow: "auto",
       }}
     >
       <h4 style={{ paddingLeft: "1rem" }}>Recientes</h4>

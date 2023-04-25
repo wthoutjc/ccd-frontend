@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 
 // Next Auth
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 interface LoginProps {
   username: string;

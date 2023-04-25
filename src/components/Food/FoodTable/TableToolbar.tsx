@@ -1,23 +1,18 @@
 "use client";
-import { Box, IconButton, Tooltip, Typography } from "@mui/material";
-
-// Services
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Box, Typography } from "@mui/material";
 
 // Interfaces
-import { IContextTable } from "@/interfaces";
+import { IContextTable, IFood } from "@/interfaces";
+import { AddToCart } from "@/components/Cart";
 
 interface Props {
   title: string;
   numSelected: number;
-  selected: string;
-  // to: string;
+  food: IFood | null;
   context: IContextTable;
 }
 
-const TableToolbar = ({ title, numSelected, selected, context }: Props) => {
-  const handleCart = () => {};
-
+const TableToolbar = ({ title, numSelected, food, context }: Props) => {
   return (
     <Box
       sx={{
@@ -51,19 +46,7 @@ const TableToolbar = ({ title, numSelected, selected, context }: Props) => {
                 display: "flex",
               }}
             >
-              {context.buy && (
-                <Tooltip title="Añadir al carrito">
-                  <IconButton
-                    size="small"
-                    onClick={handleCart}
-                    sx={{
-                      color: "#fff",
-                    }}
-                  >
-                    <ShoppingCartIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
+              {context.buy && food && <AddToCart {...food} />}
             </Box>
           )}
         </Box>

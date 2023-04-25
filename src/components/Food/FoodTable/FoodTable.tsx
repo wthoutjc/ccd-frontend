@@ -1,21 +1,19 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Checkbox, TableCell, Typography } from "@mui/material";
 
 // Components
 import { TableToolbar } from "@/components";
 
 // Interfaces
-import { ITable } from "@/interfaces";
+import { IFood, ITable } from "@/interfaces";
 
 // Image
 import Image from "next/image";
-import { isWhiteSpaceLike } from "typescript";
 
 const FoodTable = ({ title, columns, rows, context }: ITable) => {
-  const router = useRouter();
   const [selected, setSelected] = useState<string[]>([]);
+  const [currentFood, setCurrentFood] = useState<null | IFood>(null);
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -48,6 +46,18 @@ const FoodTable = ({ title, columns, rows, context }: ITable) => {
 
   const isSelected = (index: string) => selected.indexOf(index) !== -1;
 
+  useEffect(() => {
+    if (selected.length === 1) {
+      const dataFood = rows.filter((row) => row[0] === selected[0])[0];
+      setCurrentFood({
+        name: dataFood[0],
+        price: dataFood[1],
+        description: dataFood[2],
+        image: dataFood[3],
+      });
+    }
+  }, [selected, rows]);
+
   return (
     <div
       style={{
@@ -64,7 +74,7 @@ const FoodTable = ({ title, columns, rows, context }: ITable) => {
         <TableToolbar
           title={title}
           numSelected={selected?.length}
-          selected={selected[0]}
+          food={currentFood}
           context={context}
         />
       )}
@@ -119,16 +129,9 @@ const FoodTable = ({ title, columns, rows, context }: ITable) => {
               return (
                 <tr
                   key={index}
-                  onClick={(event) => {
-                    if (context.buy) handleClick(event, String(row[0]));
-                  }}
-                  onDoubleClick={(event) => {
-                    if (context.buy.enabled) {
-                      handleClick(event, String(row[0]));
-                      return router.push(`xd/${String(row[0])}`);
-                    }
-                    return;
-                  }}
+                  onClick={(event) =>
+                    context.buy && handleClick(event, String(row[0]))
+                  }
                   tabIndex={-1}
                   style={{
                     backgroundColor: isItemSelected ? "#ffbe76" : "inherit",

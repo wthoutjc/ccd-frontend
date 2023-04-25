@@ -7,6 +7,7 @@ import {
   Button,
   Tooltip,
   Divider,
+  Badge,
 } from "@mui/material";
 
 // Icons
@@ -20,11 +21,22 @@ import Link from "next/link";
 import Image from "next/image";
 import logoPic from "@/assets/logo.png";
 
+// Redux
+import { useAppSelector, useAppDispatch } from "@/hooks";
+import { openCart } from "@/reducers";
+
 interface Props {
   handleOpen: () => void;
 }
 
 const NavbarLogged = ({ handleOpen }: Props) => {
+  const dispatch = useAppDispatch();
+  const { products } = useAppSelector((state) => state.cart);
+
+  const handleOpenCart = () => {
+    dispatch(openCart());
+  };
+
   return (
     <AppBar
       position="static"
@@ -60,9 +72,11 @@ const NavbarLogged = ({ handleOpen }: Props) => {
             display: "flex",
           }}
         >
-          <Tooltip title="Ver carrito">
-            <IconButton>
-              <ShoppingCartIcon />
+          <Tooltip title="Ver carrito" sx={{ mr: 1 }}>
+            <IconButton onClick={handleOpenCart}>
+              <Badge badgeContent={products.length} color="primary">
+                <ShoppingCartIcon />
+              </Badge>
             </IconButton>
           </Tooltip>
 
